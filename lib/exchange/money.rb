@@ -58,7 +58,7 @@ module Exchange
       yield(self) if block_given?
       
       self.time             = Helper.assure_time(time || opts[:at], :default => :now)
-      self.value            = ISO.instantiate(value, currency || currency_arg)
+      self.value            = ISO.instantiate(value, currency || currency_arg).floor(12)
       self.currency         = currency || currency_arg
     end
     
