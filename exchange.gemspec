@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency             "nokogiri", "~> 1", ">= 1.0.0"
   s.add_development_dependency "json", "~> 1", ">= 1.0.0"
   s.add_development_dependency "yard", "~> 0.8"
-  s.add_development_dependency "bundler", "~> 1.3"
+  s.add_development_dependency "bundler", "~> 2.2"
   if RUBY_ENGINE == 'rbx'
     s.add_development_dependency "rubysl-bigdecimal", "~> 2.0"
     s.add_development_dependency "rubysl-singleton", "~> 2.0"

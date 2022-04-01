@@ -30,14 +30,14 @@ describe "Exchange::Cachify" do
       end
     end
     context "with an array" do
-      subject { [2, 2.3, "blu", :bli, BigDecimal.new("3.345345")] }
+      subject { [2, 2.3, "blu", :bli, BigDecimal("3.345345")] }
       it "should work" do
         expect(subject.cachify.decachify).to eq(subject)
       end
     end
     context "with numeric" do
       context "big decimal" do
-        subject { BigDecimal.new("33.3333333", 3) }
+        subject { BigDecimal("33.3333333", 3) }
         it "should work" do
           expect(subject.cachify.decachify).to eq(subject)
         end
