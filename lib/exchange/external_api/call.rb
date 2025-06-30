@@ -78,6 +78,12 @@ module Exchange
 
     # The Api Error to throw when an API Call fails
     #
-    APIError = Class.new Error
+    class APIError < Error
+      attr_reader :caused_by
+      def initialize(message, caused_by = nil)
+        super(message)
+        @caused_by = caused_by
+      end
+    end
   end
 end
