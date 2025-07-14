@@ -4,6 +4,8 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'bundler'
+require 'pry'
+
 begin
   Bundler.setup(:default, :test)
 rescue Bundler::BundlerError => e
@@ -19,7 +21,7 @@ module HelperMethods
   def fixture(name)
     File.read(File.dirname(__FILE__) +  "/support/#{name}")
   end
-  
+
   def mock_api(adress, response, count=1)
     @uri_mock = double('uri', :open => double('opened_uri', :read => response))
     expect(URI).to receive(:parse).with(adress).at_most(count).times.and_return(@uri_mock)

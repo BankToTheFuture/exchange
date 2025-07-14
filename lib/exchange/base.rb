@@ -8,7 +8,7 @@ module Exchange
 
   # The current version of the exchange gem
   #
-  VERSION = '1.6.0'.freeze
+  VERSION = '1.6.3'.freeze
 
   # The root installation path of the gem
   # @version 0.5
