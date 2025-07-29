@@ -19,13 +19,16 @@ Gem::Specification.new do |s|
   s.require_paths     = ["lib"]
 
   s.add_dependency             "bigdecimal"
-  s.add_dependency             "nokogiri", "~> 1.16", ">= 1.16.2"
-  s.add_development_dependency "json", "~> 2.7", ">= 2.7.1"
-  s.add_development_dependency "yard", "~> 0.8"
-  s.add_development_dependency "bundler", "~> 2.5"
+  s.add_dependency             "nokogiri"
+
+  s.add_development_dependency "json"
+  s.add_development_dependency "yard"
+  s.add_development_dependency "bundler"
+  s.add_development_dependency "pry"
+
   if RUBY_ENGINE == 'rbx'
-    s.add_development_dependency "rubysl-bigdecimal", "~> 2.0"
-    s.add_development_dependency "rubysl-singleton", "~> 2.0"
-    s.add_development_dependency "racc", "~> 1.4"
+    s.add_development_dependency "rubysl-bigdecimal"
+    s.add_development_dependency "rubysl-singleton"
+    s.add_development_dependency "racc"
   end
 end

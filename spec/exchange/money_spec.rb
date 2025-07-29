@@ -59,7 +59,7 @@ describe "Exchange::Money" do
     context "when an api is not reachable" do
       context "and a fallback api is" do
         it "should use the fallback " do
-          expect(URI).to receive(:parse).with("http://openexchangerates.org/api/latest.json?app_id=").once.and_raise Exchange::ExternalAPI::APIError
+          expect(URI).to receive(:parse).with("http://openexchangerates.org/api/latest.json?app_id=").once.and_raise Exchange::ExternalAPI::APIError.new('test message')
           mock_api("http://api.finance.xaviermedia.com/api/#{Time.now.strftime("%Y/%m/%d")}.xml", fixture('api_responses/example_xml_api.xml'), 3)
           expect(subject.to(:ch).value.round(2)).to eq(36.36)
           expect(subject.to(:ch).currency).to eq(:chf)
@@ -68,9 +68,9 @@ describe "Exchange::Money" do
       end
       context "and no fallback api is" do
         it "should raise the api error" do
-          expect(URI).to receive(:parse).with("http://openexchangerates.org/api/latest.json?app_id=").once.and_raise Exchange::ExternalAPI::APIError
-          expect(URI).to receive(:parse).with("http://api.finance.xaviermedia.com/api/#{Time.now.strftime("%Y/%m/%d")}.xml").once.and_raise Exchange::ExternalAPI::APIError
-          expect(URI).to receive(:parse).with("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml").once.and_raise Exchange::ExternalAPI::APIError
+          expect(URI).to receive(:parse).with("http://openexchangerates.org/api/latest.json?app_id=").once.and_raise Exchange::ExternalAPI::APIError.new('test message')
+          expect(URI).to receive(:parse).with("http://api.finance.xaviermedia.com/api/#{Time.now.strftime("%Y/%m/%d")}.xml").once.and_raise Exchange::ExternalAPI::APIError.new('test message')
+          expect(URI).to receive(:parse).with("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml").once.and_raise Exchange::ExternalAPI::APIError.new('test message')
           expect { subject.to(:ch) }.to raise_error Exchange::ExternalAPI::APIError
         end
       end
@@ -81,7 +81,7 @@ describe "Exchange::Money" do
         it "should use the fallback" do
           expect(subject.api::CURRENCIES).to receive(:include?).with(:usd).and_return true
           expect(subject.api::CURRENCIES).to receive(:include?).with(:chf).and_return true
-          expect(URI).to receive(:parse).with("http://openexchangerates.org/api/latest.json?app_id=").once.and_raise Exchange::ExternalAPI::APIError
+          expect(URI).to receive(:parse).with("http://openexchangerates.org/api/latest.json?app_id=").once.and_raise Exchange::ExternalAPI::APIError.new('test message')
           mock_api("http://api.finance.xaviermedia.com/api/#{Time.now.strftime("%Y/%m/%d")}.xml", fixture('api_responses/example_xml_api.xml'), 3)
           expect(subject.to(:usd).value.round(2)).to eq(40.00)
           expect(subject.to(:usd).currency).to eq(:usd)
